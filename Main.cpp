@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 			cout << "Sin espacios ni guiones, ejemplo: 8273123273510569" << endl;
 			cin >> tarjeta;
 			validador(tarjeta);
-			cout << tarjeta << endl;
+			//cout << tarjeta << endl;
 		}
 		else{
 			cout << "Gracias por utilizar este programa" << endl;
