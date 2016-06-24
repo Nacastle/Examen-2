@@ -8,6 +8,7 @@ using std::string;
 
 void encriptacion(int n, string & palabra);
 void desencriptar(int n, string & palabra);
+void validador(string& tarjeta);
 
 int main(int argc, char const *argv[])
 {
@@ -18,7 +19,7 @@ int main(int argc, char const *argv[])
 		if (opcion == 1)
 		{
 			string palabra;
-			int n = 4;
+			int n = 3;
 			cout << "Bienvenido a la encriptacion." << endl;
 			cout << "Introduzca la palabra a Encriptar, porfavor ingrese la palabra sin espacios: " << endl;
 			cin >> palabra;
@@ -28,7 +29,7 @@ int main(int argc, char const *argv[])
 		else if (opcion == 2)
 		{
 			string palabra;
-			int n = 4;
+			int n = 3;
 			cout << "Bienvenido al desencriptador." << endl;
 			cout << "Introduzca la palabra a desencriptar, porfavor ingrese la palabra sin espacios: " << endl;
 			cin >> palabra;
@@ -37,11 +38,17 @@ int main(int argc, char const *argv[])
 
 		}else if (opcion == 3)
 		{
-			
+			string tarjeta;
+			cout << "Bienvenido al verificador de tarjetas" << endl;
+			cout << "Porfavor ingrese el numero de la tarjeta (16 digitos del 0-9)" << endl;
+			cout << "Sin espacios ni guiones, ejemplo: 8273123273510569" << endl;
+			cin >> tarjeta;
+			validador(tarjeta);
+			cout << tarjeta << endl;
 		}
 		else{
 			cout << "Gracias por utilizar este programa" << endl;
-			opcion = 3;
+			opcion = 4;
 		}
 	}
 	return 0;
@@ -78,6 +85,29 @@ void encriptacion(int n, string& palabra){
 	}
 }
 
-void desencriptar(int n, string & palabra){
+void desencriptar(int n, string& palabra){
 	encriptacion(-n,palabra);
+}
+
+void validador(string& tarjeta){
+	int pares=0,sumapares=0,impares=0,sumaimpares=0,total=0;
+	for (int posicion = tarjeta.length(); posicion > 0; posicion--)
+	{
+		if (posicion%2 == 0)
+		{
+			pares = (int) tarjeta[posicion - 1] - '0';
+			sumapares = sumapares + pares;
+		}else{
+			impares = ((int) tarjeta[posicion - 1] - '0')*2;
+			impares = impares%10 + impares/10;
+			sumaimpares = sumaimpares + impares;
+		}
+	}
+	total = sumaimpares + sumapares;
+	if (total%10 == 0)
+	{
+		cout << "Tarjeta valida." << endl;
+	}else{
+		cout << "Tarjeta invalida." << endl;
+	}
 }
